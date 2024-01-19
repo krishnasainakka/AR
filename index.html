@@ -8,6 +8,7 @@ import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.133.0/examples/jsm/l
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"></script>
+  <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -61,9 +62,9 @@ import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.133.0/examples/jsm/l
 <div class="container">
   <div class="card">
     <model-viewer src="./models/badly_simulated_dress.glb" alt="Card 1 Model" camera-controls auto-rotate ar>
-      <button slot="ar-button" class="ar-button">
+      <!-- <button slot="ar-button" class="ar-button">
         👋 Activate AR
-      </button>
+      </button> -->
     </model-viewer>
     <div class="card-content">
       <h2>Card 1</h2>
@@ -72,10 +73,34 @@ import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.133.0/examples/jsm/l
   </div>
 
   <div class="card">
-    <model-viewer src="./models/ShirtModel-transformed.glb" alt="Card 2 Model" camera-controls auto-rotate>
-      <button slot="ar-button" class="ar-button">
+    <model-viewer src="./models/office_chair.glb" alt="Card 1 Model" camera-controls auto-rotate ar>
+      <!-- <button slot="ar-button" class="ar-button">
         👋 Activate AR
-      </button>
+      </button> -->
+    </model-viewer>
+    <div class="card-content">
+      <h2>Card 1</h2>
+      <p>This is the content of card 1.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <model-viewer src="./models/helmet.glb" alt="Card 1 Model" camera-controls auto-rotate ar>
+      <!-- <button slot="ar-button" class="ar-button">
+        👋 Activate AR
+      </button> -->
+    </model-viewer>
+    <div class="card-content">
+      <h2>Card 1</h2>
+      <p>This is the content of card 1.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <model-viewer src="./models/ShirtModel-transformed.glb" alt="Card 2 Model" camera-controls auto-rotate ar>
+      <!-- <button slot="ar-button" class="ar-button">
+        👋 Activate AR
+      </button> -->
     </model-viewer>
     <div class="card-content">
       <h2>Card 2</h2>
@@ -96,7 +121,7 @@ import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.133.0/examples/jsm/l
   </div>
 
   <div class="card">
-    <model-viewer src="model-viewer\packages\shared-assets\models\yellow_dress.glb" ar ar-scale="fixed" camera-controls touch-action="pan-y" alt="A 3D model of an astronaut" shadow-intensity="2" skybox-image="model-viewer\packages\shared-assets\environments\spruit_sunrise_1k_HDR.jpg" skybox-height="2m" max-camera-orbit="auto 90deg auto" ios-src="../../shared-assets/models/Astronaut.usdz" xr-environment>
+    <model-viewer src="./models/Astronaut.glb" ar ar-scale="fixed" camera-controls touch-action="pan-y" alt="A 3D model of an astronaut" shadow-intensity="2" skybox-image="./models/spruit_sunrise_1k_HDR.jpg" skybox-height="2m" max-camera-orbit="auto 90deg auto" ios-src="./models/Astronaut.usdz" xr-environment>
       <button slot="ar-button" class="ar-button">
         👋 Activate AR
       </button>
@@ -106,190 +131,19 @@ import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.133.0/examples/jsm/l
       <p>This is the content of card 4.</p>
     </div>
   </div>
+
+  <div class="card">
+    <model-viewer src="./models/Astronaut.glb" ar ar-scale="fixed" camera-controls touch-action="pan-y" alt="A 3D model of an astronaut" shadow-intensity="2" skybox-height="2m" max-camera-orbit="auto 90deg auto" ios-src="../../shared-assets/models/Astronaut.usdz" xr-environment>
+      <!-- <button slot="ar-button" class="ar-button">
+        👋 Activate AR
+      </button> -->
+    </model-viewer>
+    <div class="card-content">
+      <h2>Card 3</h2>
+      <p>This is the content of card 3.</p>
+    </div>
+  </div>
 </div>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Scene with Floors, Trees, and Character</title>
-    <style>
-        body { margin: 0; }
-    </style>
-</head>
-<body>
-
-<script type="module">
-    import * as THREE from 'https://cdn.skypack.dev/three@0.133.0/build/three.module.js';
-    import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.133.0/examples/jsm/loaders/GLTFLoader.js';
-    import { OrbitControls } from 'https://cdn.skypack.dev/three@0.133.0/examples/jsm/controls/OrbitControls.js';
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    // Set renderer background color
-    renderer.setClearColor(0xffffff);
-
-    let character;
-    let floorModels = [];
-    let trees = [];
-
-    // Load 3D models with GLTFLoader
-    const gltfLoader = new GLTFLoader();
-
-    // Add character model
-    const characterPath = 'destiny_2_character_bust.glb';
-    const characterPosition = new THREE.Vector3(0, 1, 5);
-
-    gltfLoader.load(characterPath, (gltf) => {
-        character = gltf.scene;
-        character.scale.set(0.2, 0.2, 0.2);
-        const boundingBox = new THREE.Box3().setFromObject(character);
-        character.position.y = boundingBox.getSize(new THREE.Vector3()).y * 0.5;
-        character.position.add(characterPosition);
-        scene.add(character);
-
-        console.log(`Character model "${characterPath}" loaded successfully.`);
-        console.log('Character model details:', character);
-        console.log('Character model position:', character.position);
-        console.log('Character model scale:', character.scale);
-
-        // Add event listener only after the character is loaded
-        window.addEventListener('keydown', onKeyDown);
-    }, undefined, (error) => {
-        console.error(`Error loading character model "${characterPath}":`, error);
-    });
-
-    // Duplicate and add floors
-    const floorModelPath = 'future_stairs.glb';
-    const floorModelScale = new THREE.Vector3(10, 1, 10);
-    const floorModelDistance = 20;
-
-    for (let i = -3; i < 4; i++) {
-        gltfLoader.load(floorModelPath, (gltf) => {
-            const floorModel = gltf.scene;
-            floorModel.scale.copy(floorModelScale);
-            floorModel.position.set(0, 0, i * floorModelDistance);
-            scene.add(floorModel);
-            floorModels.push(floorModel);
-
-            console.log(`Floor model ${i} "${floorModelPath}" loaded successfully.`);
-            console.log(`Floor model ${i} details:`, floorModel);
-            console.log(`Floor model ${i} position:`, floorModel.position);
-            console.log(`Floor model ${i} scale:`, floorModel.scale);
-        }, undefined, (error) => {
-            console.error(`Error loading floor model "${floorModelPath}":`, error);
-        });
-    }
-
-    // Add trees at different distances
-    const treePaths = ['maple_tree.glb', 'maple_tree.glb'];
-    const treeScale = new THREE.Vector3(0.1, 0.1, 0.1);
-    const treeDistances = [30, 5];
-
-    treePaths.forEach((path, index) => {
-        gltfLoader.load(path, (gltf) => {
-            const tree = gltf.scene;
-            tree.scale.copy(treeScale);
-            tree.position.set(treeDistances[index], 0.5, 0);
-            scene.add(tree);
-            trees.push(tree);
-
-            console.log(`Tree model "${path}" loaded successfully.`);
-            console.log(`Tree ${index + 1} details:`, tree);
-            console.log(`Tree ${index + 1} position:`, tree.position);
-            console.log(`Tree ${index + 1} scale:`, tree.scale);
-        }, undefined, (error) => {
-            console.error(`Error loading tree model "${path}":`, error);
-        });
-    });
-
-    // Add directional light
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(5, 10, 5);
-    scene.add(directionalLight);
-
-    // Set initial camera position
-    camera.position.set(10, 15, 20);
-    camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-    // Add OrbitControls to enable camera movement
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.25;
-    controls.screenSpacePanning = false;
-    controls.maxPolarAngle = Math.PI / 2;
-
-    const moveSpeed = 0.1;
-
-    // Handle keyboard input for character movement
-    function onKeyDown(event) {
-        switch (event.code) {
-            case 'ArrowUp':
-                character.position.z -= moveSpeed;
-                break;
-            case 'ArrowDown':
-                character.position.z += moveSpeed;
-                break;
-            case 'ArrowLeft':
-                character.position.x -= moveSpeed;
-                break;
-            case 'ArrowRight':
-                character.position.x += moveSpeed;
-                break;
-        }
-        // Update camera position to follow the player
-        camera.position.copy(character.position);
-        camera.position.y += 2; // Adjust the height of the camera above the player
-        camera.position.z += 5; // Adjust the distance behind the player
-        camera.lookAt(character.position);
-    }
-
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    const animate = () => {
-        requestAnimationFrame(animate);
-
-        // Rotate the trees for a simple animation
-        // trees.forEach((tree, index) => {
-        //     tree.rotation.y += 0.01 * (index % 2 === 0 ? 1 : -1);
-        // });
-
-        controls.update();
-        renderer.render(scene, camera);
-    };
-
-    animate();
-</script>
-
-</body>
-</html>
-
- -->
